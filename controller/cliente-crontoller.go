@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/brisanet/cliente/domain"
 	"github.com/brisanet/cliente/service"
 	"github.com/gin-gonic/gin"
@@ -9,6 +11,7 @@ import (
 type ClienteController interface {
 	FindAll() []domain.Cliente
 	Save(ctx *gin.Context) error
+	ShowAll(ctx *gin.Context)
 }
 
 type controller struct {
@@ -32,4 +35,16 @@ func (c *controller) Save(ctx *gin.Context) error{
 	}
 	c.service.Save(cliente)
 	return nil
+}
+
+func (c *controller) ShowAll(ctx *gin.Context){
+	clientes := c.service.FindAll()
+	data := gin.H{
+		"title": "Name Cliente",
+		"clientes": clientes,
+	}
+
+	ctx.HTML(http.StatusOK,"index.html",data)
+
+
 }

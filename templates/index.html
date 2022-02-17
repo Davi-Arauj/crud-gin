@@ -1,0 +1,39 @@
+{{template "header.html"}}
+
+<h2>Lista de Clientes</h2>
+
+<div class="container">  
+        <div class="row">
+                 
+               
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        
+                        <th>Name</th>  
+                        <th>Email</th>
+                        <th>Fone</th>
+                        <th>Tipo Cliente</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>{{range .clientes }}  
+                        <td>{{.Name}}</td>
+                        <td>{{.Email}}</td>
+                        <td>{{.Fone}}</td>
+                        <td>{{.TipoCliente.TipoClienteString}}</td>
+                        
+                    </tr>
+                
+                </tbody>
+                {{end}}
+            </table>                    
+            
+        </div>          
+    </div>
+
+
+
+
+{{template "footer.html"}}

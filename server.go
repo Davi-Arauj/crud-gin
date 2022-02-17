@@ -30,18 +30,34 @@ func main() {
 	server.Use(gin.Recovery(), middlewares.Logger(),
 		middlewares.BasicAuth(), gindump.Dump())
 
-	server.GET("/clientes", func(ctx *gin.Context) {
+	server.Static("/css","./templates/css")
+
+	server.LoadHTMLGlob("templates/*.html")
+
+	apiRoutes := server.Group("/api")
+	{
+		apiRoutes.GET("/clientes", func(ctx *gin.Context) {
 		ctx.JSON(200, clienteController.FindAll())
+			
+		apiRoutes.POST("/clientes", func(ctx *gin.Context) {
+			err := clienteController.Save(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H{"message": "Cliente Inserido com sucesso!  :) "})
+			}
+		})
+	
 	})
 
-	server.POST("/clientes", func(ctx *gin.Context) {
-		err := clienteController.Save(ctx)
-		if err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		} else {
-			ctx.JSON(http.StatusOK, gin.H{"message": "Cliente Inserido com sucesso!  :) "})
-		}
-	})
+	}
+
+	viewRoutes := server.Group("/view")
+	{
+		viewRoutes.GET("/clientes", clienteController.ShowAll)
+	}
+
+	
 
 	server.Run(":8080")
 

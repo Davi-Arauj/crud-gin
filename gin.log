@@ -2,15 +2,25 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] GET    /clientes                 --> main.main.func1 (5 handlers)
-[GIN-debug] POST   /clientes                 --> main.main.func2 (5 handlers)
+[GIN-debug] GET    /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (5 handlers)
+[GIN-debug] HEAD   /css/*filepath            --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (5 handlers)
+[GIN-debug] Loaded HTML Templates (4): 
+	- 
+	- footer.html
+	- header.html
+	- index.html
+
+[GIN-debug] GET    /api/clientes             --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /view/clientes            --> github.com/brisanet/cliente/controller.ClienteController.ShowAll-fm (5 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :8080
-::1 - [17 Feb 22 10:54 -03] POST /clientes 400 344.92µs 
-::1 - [17 Feb 22 10:54 -03] POST /clientes 400 205.358µs 
-::1 - [17 Feb 22 10:54 -03] POST /clientes 400 193.807µs 
-::1 - [17 Feb 22 10:54 -03] POST /clientes 200 282.077µs 
-::1 - [17 Feb 22 10:54 -03] POST /clientes 400 154.828µs 
-::1 - [17 Feb 22 10:54 -03] POST /clientes 200 581.039µs 
-::1 - [17 Feb 22 10:55 -03] GET /clientes 200 211.37µs 
+::1 - [17 Feb 22 13:33 -03] GET /view/clientes 200 1.087939ms 
+::1 - [17 Feb 22 13:33 -03] GET /view/clientes 200 1.799627ms 
+[GIN-debug] POST   /api/clientes             --> main.main.func1.1 (5 handlers)
+::1 - [17 Feb 22 13:33 -03] GET /api/clientes 200 232.604µs 
+::1 - [17 Feb 22 13:33 -03] POST /api/clientes 200 314.376µs 
+::1 - [17 Feb 22 13:33 -03] POST /api/clientes 200 174.336µs 
+::1 - [17 Feb 22 13:33 -03] GET /view/clientes 200 731.957µs 
+::1 - [17 Feb 22 13:34 -03] POST /api/clientes 200 263.931µs 
+::1 - [17 Feb 22 13:34 -03] GET /view/clientes 200 1.653677ms 
