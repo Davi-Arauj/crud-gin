@@ -7,10 +7,10 @@
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :8080
-::1 - [17 Feb 22 09:57 -03] GET /clientes 401 3.072µs 
-::1 - [17 Feb 22 09:58 -03] GET /clientes 200 194.076µs 
-[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 400 with 200
-::1 - [17 Feb 22 09:58 -03] POST /clientes 200 248.288µs 
-::1 - [17 Feb 22 09:58 -03] GET /clientes 200 130.234µs 
-::1 - [17 Feb 22 09:58 -03] POST /clientes 401 6.522µs 
-::1 - [17 Feb 22 09:58 -03] POST /clientes 200 535.552µs 
+::1 - [17 Feb 22 10:54 -03] POST /clientes 400 344.92µs 
+::1 - [17 Feb 22 10:54 -03] POST /clientes 400 205.358µs 
+::1 - [17 Feb 22 10:54 -03] POST /clientes 400 193.807µs 
+::1 - [17 Feb 22 10:54 -03] POST /clientes 200 282.077µs 
+::1 - [17 Feb 22 10:54 -03] POST /clientes 400 154.828µs 
+::1 - [17 Feb 22 10:54 -03] POST /clientes 200 581.039µs 
+::1 - [17 Feb 22 10:55 -03] GET /clientes 200 211.37µs 

@@ -8,7 +8,7 @@ import (
 
 type ClienteController interface {
 	FindAll() []domain.Cliente
-	Save(ctx *gin.Context) domain.Cliente
+	Save(ctx *gin.Context) error
 }
 
 type controller struct {
@@ -24,9 +24,12 @@ func (c *controller) FindAll() []domain.Cliente {
 	return c.service.FindAll()
 }
 
-func (c *controller) Save(ctx *gin.Context) domain.Cliente {
+func (c *controller) Save(ctx *gin.Context) error{
 	var cliente domain.Cliente
-	ctx.BindJSON(&cliente)
+	err := ctx.ShouldBindJSON(&cliente)
+	if err!= nil {
+		return err
+	}
 	c.service.Save(cliente)
-	return cliente
+	return nil
 }

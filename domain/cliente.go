@@ -7,8 +7,8 @@ import (
 
 type Cliente struct {
 	gorm.Model
-	Name string `json:"Nome"`
-	Email string `json:"e-mail"`
-	Fone int  `json:"fone"`
-	TipoCliente enums.TipoCliente 
+	Name        string `json:"Nome" binding:"required,min=3,max=70"`
+	Email       string `json:"e-mail" binding:"required,email"`
+	Fone        int    `json:"fone"`
+	TipoCliente enums.TipoCliente
 }
