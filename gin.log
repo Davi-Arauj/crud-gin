@@ -10,17 +10,17 @@
 	- header.html
 	- index.html
 
-[GIN-debug] GET    /api/clientes             --> main.main.func1 (5 handlers)
+[GIN-debug] GET    /api/cliente              --> main.main.func1 (5 handlers)
 [GIN-debug] GET    /view/clientes            --> github.com/brisanet/cliente/controller.ClienteController.ShowAll-fm (5 handlers)
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :8080
-::1 - [17 Feb 22 13:33 -03] GET /view/clientes 200 1.087939ms 
-::1 - [17 Feb 22 13:33 -03] GET /view/clientes 200 1.799627ms 
-[GIN-debug] POST   /api/clientes             --> main.main.func1.1 (5 handlers)
-::1 - [17 Feb 22 13:33 -03] GET /api/clientes 200 232.604µs 
-::1 - [17 Feb 22 13:33 -03] POST /api/clientes 200 314.376µs 
-::1 - [17 Feb 22 13:33 -03] POST /api/clientes 200 174.336µs 
-::1 - [17 Feb 22 13:33 -03] GET /view/clientes 200 731.957µs 
-::1 - [17 Feb 22 13:34 -03] POST /api/clientes 200 263.931µs 
-::1 - [17 Feb 22 13:34 -03] GET /view/clientes 200 1.653677ms 
+[GIN-debug] POST   /api/cliente              --> main.main.func1.1 (5 handlers)
+[GIN-debug] GET    /api/cliente/:id          --> main.main.func1.2 (5 handlers)
+::1 - [17 Feb 22 16:01 -03] GET /api/cliente 200 329.411µs 
+::1 - [17 Feb 22 16:01 -03] POST /api/cliente 200 2.891192ms 
+[GIN-debug] POST   /api/cliente              --> main.main.func1.1 (5 handlers)
+[GIN-debug] [WARNING] Headers were already written. Wanted to override status code 200 with 500
+::1 - [17 Feb 22 16:01 -03] POST /api/cliente 200 2.510854ms 
+::1 - [17 Feb 22 16:01 -03] POST /api/cliente 200 1.66529ms 
+::1 - [17 Feb 22 16:05 -03] POST /api/cliente 200 1.918112ms 
