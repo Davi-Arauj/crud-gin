@@ -1,43 +1,41 @@
 package service
 
 import (
-	"github.com/brisanet/cliente/db"
 	"github.com/brisanet/cliente/domain"
+	"github.com/brisanet/cliente/repository"
 )
 
 type ClienteService interface {
-	Save(domain.Cliente) domain.Cliente
+	Save(domain.Cliente) error
+	Update(domain.Cliente) error
+	Delete(domain.Cliente) error
 	FindAll() []domain.Cliente
-	FindById(int) domain.Cliente
 }
 
 type clienteService struct {
-	clientes []domain.Cliente
+	repository repository.ClienteRepository
 }
 
-func New() ClienteService {
-	return &clienteService{}
+func New(clienteRepository repository.ClienteRepository) ClienteService {
+	return &clienteService{
+		repository: clienteRepository,
+	}
 }
 
-func (service *clienteService) Save(cliente domain.Cliente) domain.Cliente {
-	db.DB.Create(&cliente)
-	return cliente
+func (service *clienteService) Save(cliente domain.Cliente) error {
+	service.repository.Save(cliente)
+	return nil
+}
+
+func (service *clienteService) Update(cliente domain.Cliente) error {
+	service.repository.Update(cliente)
+	return nil
+}
+
+func (service *clienteService) Delete(cliente domain.Cliente) error {
+	service.repository.Delete(cliente)
+	return nil
 }
 func (service *clienteService) FindAll() []domain.Cliente {
-	
-	return service.clientes
-}
-
-func (service *clienteService) FindById(id int) domain.Cliente {
-	clientes := service.FindAll()
-	cli := domain.Cliente{}
-	for indice, v := range clientes {
-		if indice == id {
-			cli = v
-		} else {
-
-		}
-	}
-
-	return cli
+	return service.repository.FindAll()
 }
