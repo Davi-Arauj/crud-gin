@@ -1,36 +1,29 @@
 package main
 
 import (
-	"io"
 	"net/http"
-	"os"
 
 	"github.com/brisanet/cliente/controller"
-	"github.com/brisanet/cliente/db"
-	"github.com/brisanet/cliente/domain"
+
 	"github.com/brisanet/cliente/middlewares"
+	"github.com/brisanet/cliente/repository"
 	"github.com/brisanet/cliente/service"
 	"github.com/gin-gonic/gin"
 	gindump "github.com/tpkeeper/gin-dump"
 )
 
 var (
-	clienteService    service.ClienteService       = service.New()
+	clienteRepository repository.ClienteRepository = repository.NewClienteRepository()
+
+	clienteService service.ClienteService = service.New(clienteRepository)
+
 	clienteController controller.ClienteController = controller.New(clienteService)
 )
 
-func setupLogOutput() {
-	f, _ := os.Create("gin.log")
-	gin.DefaultWriter = io.MultiWriter(f, os.Stdout)
-}
-
+//https://gitlab.com/pragmaticreviews/golang-gin-poc/-/blob/gorm/server.go
 func main() {
 
-	db.ConnectDB()
-
-	db.DB.AutoMigrate(&domain.Cliente{})
-
-	setupLogOutput()
+	defer clienteRepository.CloseDB()
 
 	server := gin.New()
 
@@ -44,11 +37,9 @@ func main() {
 	apiRoutes := server.Group("/api")
 	{
 		apiRoutes.GET("/cliente", func(ctx *gin.Context) {
-			ctx.JSON(200, clienteController.FindAll())	
+			ctx.JSON(200, clienteController.FindAll())
 		})
-		apiRoutes.GET("/cliente/:id", func(ctx *gin.Context) {
-			ctx.JSON(200, clienteController.FindById)
-		})
+
 		apiRoutes.POST("/cliente", func(ctx *gin.Context) {
 			err := clienteController.Save(ctx)
 			if err != nil {
@@ -67,5 +58,4 @@ func main() {
 
 	server.Run(":8080")
 
-	defer db.DB.Close()
 }

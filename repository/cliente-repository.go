@@ -6,6 +6,7 @@ import (
 
 	"github.com/brisanet/cliente/domain"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 type ClienteRepository interface {
