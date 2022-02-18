@@ -13,6 +13,7 @@ type ClienteRepository interface {
 	Save(cliente domain.Cliente)
 	Update(cliente domain.Cliente)
 	Delete(cliente domain.Cliente)
+	FindById(cliente domain.Cliente) domain.Cliente
 	FindAll() []domain.Cliente
 	CloseDB()
 }
@@ -66,4 +67,11 @@ func (db *database) FindAll() []domain.Cliente {
 	var clientes []domain.Cliente
 	db.connection.Set("gorm:auto_preload", true).Find(&clientes)
 	return clientes
+}
+
+func (db *database) FindById(cliente domain.Cliente) domain.Cliente {
+	var cli domain.Cliente
+	db.connection.First(&cli, cliente.ID)
+	fmt.Println("Repository:->", cli.ID)
+	return cli
 }

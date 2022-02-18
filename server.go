@@ -40,6 +40,16 @@ func main() {
 			ctx.JSON(200, clienteController.FindAll())
 		})
 
+		apiRoutes.GET("/cliente/:id", func(ctx *gin.Context) {
+			cliente, err := clienteController.FindById(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{
+					"error ": err.Error()})
+			} else {
+				ctx.JSON(200, cliente)
+			}
+		})
+
 		apiRoutes.DELETE("/cliente/:id", func(ctx *gin.Context) {
 			err := clienteController.Delete(ctx)
 			if err != nil {

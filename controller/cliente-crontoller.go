@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -14,6 +15,7 @@ type ClienteController interface {
 	Save(ctx *gin.Context) error
 	Update(ctx *gin.Context) error
 	Delete(ctx *gin.Context) error
+	FindById(ctx *gin.Context) (domain.Cliente, error)
 	ShowAll(ctx *gin.Context)
 }
 
@@ -68,6 +70,20 @@ func (c *controller) Update(ctx *gin.Context) error {
 	c.service.Update(cliente)
 
 	return nil
+}
+
+func (c *controller) FindById(ctx *gin.Context) (domain.Cliente, error) {
+	var cliente domain.Cliente
+	id, erro := strconv.ParseUint(ctx.Param("id"), 0, 0)
+	fmt.Println("Id do Controler->",id)
+
+	if erro != nil {
+		fmt.Println("Error ao digitar o Id: ", erro.Error())
+	}
+	cliente.ID = id
+
+	return c.service.FindById(cliente), nil
+
 }
 
 func (c *controller) Delete(ctx *gin.Context) error {
