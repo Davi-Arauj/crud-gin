@@ -40,6 +40,27 @@ func main() {
 			ctx.JSON(200, clienteController.FindAll())
 		})
 
+		apiRoutes.DELETE("/cliente/:id", func(ctx *gin.Context) {
+			err := clienteController.Delete(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{
+					"error ": err.Error()})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H{
+					"message": "Cliente apagado com sucesso!"})
+			}
+		})
+
+		apiRoutes.PUT("/cliente/:id", func(ctx *gin.Context) {
+			err := clienteController.Update(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{"error ": err.Error()})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H{"message": "Cliente atualizado com sucesso!"})
+			}
+
+		})
+
 		apiRoutes.POST("/cliente", func(ctx *gin.Context) {
 			err := clienteController.Save(ctx)
 			if err != nil {
